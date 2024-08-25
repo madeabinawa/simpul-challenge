@@ -6,7 +6,8 @@ type Props = {
   personName: string
   message: string
   createdAt: string
-  color: string
+  bgColor: string
+  textColor: string
 }
 
 export const ChatBubble = (props: Props) => {
@@ -18,13 +19,13 @@ export const ChatBubble = (props: Props) => {
 
   return (
     <div className={`flex flex-col w-full mt-[16px] ${isMeAlign}`}>
-      <div className={`text-${props.color}`}>
+      <div className={props.textColor}>
         {props.isMe ? "You" : props.personName}
       </div>
 
       <div className={`flex ${isMeMoreReverse} justify-start items-start`}>
         <div
-          className={`flex flex-col flex-wrap justify-start items-start w-fit max-w-[518px] bg-${props.color} rounded-[5px] p-[10px]`}>
+          className={`flex flex-col flex-wrap justify-start items-start w-fit max-w-[518px] ${props.bgColor} rounded-[5px] p-[10px]`}>
           <div className="mb-3">{props.message}</div>
           <div>{props.createdAt}</div>
         </div>

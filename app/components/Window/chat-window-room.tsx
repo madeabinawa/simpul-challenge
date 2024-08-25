@@ -42,7 +42,8 @@ export const ChatWindowRoom = (props: Props) => {
           <>
             <ChatBubble
               isMe={true}
-              color="chats-light-purple"
+              textColor="text-chats-purple"
+              bgColor="bg-chats-light-purple"
               createdAt="02/06/2021 10:45"
               message="Please Check this out"
               personName="Cameron Phillips"
@@ -52,7 +53,8 @@ export const ChatWindowRoom = (props: Props) => {
 
             <ChatBubble
               isMe={false}
-              color="chats-light-orange"
+              textColor="text-chats-orange"
+              bgColor="bg-chats-light-orange"
               createdAt="02/06/2021 10:45"
               message="Please Check this out"
               personName="Cameron Phillips"

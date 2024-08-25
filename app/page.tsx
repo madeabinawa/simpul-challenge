@@ -1,5 +1,3 @@
-import { Button, FabChat, FabPrimary, FabTask } from "./components/Buttons"
-import { LoadingSpinner } from "./components/Indicators"
 import { FabPrimarySection } from "./components/Sections"
 
 export default function Home() {
