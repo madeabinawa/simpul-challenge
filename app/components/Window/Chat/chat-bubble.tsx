@@ -53,7 +53,7 @@ const MoreAction = () => {
       </button>
 
       <div
-        className={`absolute top-5 left-2 ${toggledDisplay} flex-col bg-white rounded-md justify-start items-start border-[1px] border-primary-white w-[126px] divide-solid divide-primary-white divide-y`}>
+        className={`absolute top-5 left-2 ${toggledDisplay} flex-col bg-white rounded-md justify-start items-start border-[1px] border-primary-light-grey w-[126px] divide-solid divide-primary-white divide-y`}>
         <button className="w-full text-primary-blue px-[18px] py-[11px] hover:bg-primary-white text-left">
           Edit
         </button>
