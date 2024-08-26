@@ -38,7 +38,7 @@ export const ChatWindowRoom = (props: Props) => {
         />
       </div>
 
-      <div className="h-[570px] max-h-[570px] overflow-y-auto px-[29px]">
+      <div className="h-[570px] max-h-[60vh] overflow-y-auto px-[29px]">
         {Array.from({ length: 10 }).map((_, index) => (
           <Fragment key={index}>
             <ChatBubble
