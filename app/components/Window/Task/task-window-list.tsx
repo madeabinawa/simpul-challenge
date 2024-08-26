@@ -1,6 +1,6 @@
 import { Button, DropdownButton } from "../../Buttons"
 import { MessageInput } from "../../Inputs/message-input"
-import Accordion from "./task-item"
+import { TaskItem } from "./task-item"
 
 export const TaskWindowList = () => {
   return (
@@ -13,11 +13,10 @@ export const TaskWindowList = () => {
         <Button text="New Task" />
       </div>
 
-      {/* <div className="h-[570px] max-h-[570px] overflow-y-auto px-[29px]"> */}
       <div className="flex-0 max-h-[570px] overflow-y-auto px-[29px]">
         {Array.from({ length: 10 }).map((_, index) => (
           <>
-            <Accordion />
+            <TaskItem />
           </>
         ))}
       </div>

@@ -4,10 +4,9 @@ import { useToggle } from "@mantine/hooks"
 import { createContext, useState } from "react"
 import { FabPrimary } from "../Buttons"
 import { ChatWindowList } from "../Window/Chat"
+import { TaskWindowList } from "../Window/Task"
 import { FabChatSection } from "./FabChatSection"
 import { FabTaskSection } from "./FabTaskSection"
-import { ChatWindowRoom } from "../Window/Chat/chat-window-room"
-import { TaskWindowList } from "../Window/Task"
 
 type FabContextType = {
   displayButtons: boolean
