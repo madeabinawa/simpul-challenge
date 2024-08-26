@@ -1,5 +1,1 @@
-export * from "./chat-bubble"
-export * from "./chat-divider"
-export * from "./chat-list"
-export * from "./chat-window-list"
-export * from "./chat-window-room"
+export * from "./Chat"

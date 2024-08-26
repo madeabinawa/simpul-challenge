@@ -1,5 +1,4 @@
-import { SearchInput } from "../Inputs"
-import { ChatDivider } from "./chat-divider"
+import { SearchInput } from "../../Inputs"
 import { ChatList } from "./chat-list"
 
 export const ChatWindowList = () => {

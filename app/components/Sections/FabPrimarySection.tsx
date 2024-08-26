@@ -3,10 +3,11 @@
 import { useToggle } from "@mantine/hooks"
 import { createContext, useState } from "react"
 import { FabPrimary } from "../Buttons"
-import { ChatWindowList } from "../Window"
+import { ChatWindowList } from "../Window/Chat"
 import { FabChatSection } from "./FabChatSection"
 import { FabTaskSection } from "./FabTaskSection"
-import { ChatWindowRoom } from "../Window/chat-window-room"
+import { ChatWindowRoom } from "../Window/Chat/chat-window-room"
+import { TaskWindowList } from "../Window/Task"
 
 type FabContextType = {
   displayButtons: boolean
@@ -38,7 +39,8 @@ export const FabPrimarySection = () => {
       {selectedButton === "chat" ? (
         <ChatWindowList />
       ) : (
-        <ChatWindowRoom title="Jeanette Moraima Guaman Chamba (Hutto I-589) [Hutto Follow Up -Brief Service]" />
+        // <ChatWindowRoom title="Jeanette Moraima Guaman Chamba (Hutto I-589) [Hutto Follow Up -Brief Service]" />
+        <TaskWindowList />
       )}
 
       <section className="fixed bottom-4 right-4 flex justify-end items-end gap-3">

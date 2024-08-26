@@ -1,6 +1,7 @@
 import Image from "next/image"
-import { MessageInput } from "../Inputs/message-input"
-import { Button } from "../Buttons"
+import { Fragment } from "react"
+import { Button } from "../../Buttons"
+import { MessageInput } from "../../Inputs/message-input"
 import { ChatBubble } from "./chat-bubble"
 import { ChatDivider } from "./chat-divider"
 
@@ -39,7 +40,7 @@ export const ChatWindowRoom = (props: Props) => {
 
       <div className="h-[570px] max-h-[570px] overflow-y-auto px-[29px]">
         {Array.from({ length: 10 }).map((_, index) => (
-          <>
+          <Fragment key={index}>
             <ChatBubble
               isMe={true}
               textColor="text-chats-purple"
@@ -59,7 +60,7 @@ export const ChatWindowRoom = (props: Props) => {
               message="Please Check this out"
               personName="Cameron Phillips"
             />
-          </>
+          </Fragment>
         ))}
       </div>
 
