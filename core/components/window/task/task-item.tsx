@@ -5,8 +5,7 @@ import { useToggle } from "@mantine/hooks"
 import { formatDate } from "date-fns"
 import Image from "next/image"
 import { useRef, useState } from "react"
-import { DateInput, TagsInput, TaskDescriptionInput } from "../../Inputs"
-import { Checkbox } from "../../Inputs/checkbox"
+import { Checkbox, DateInput, TagsInput, TaskDescriptionInput } from "../../inputs"
 
 export const TaskItem = () => {
   const today = formatDate(new Date(), "yyyy-MM-dd")

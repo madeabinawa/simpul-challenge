@@ -1,13 +1,15 @@
-import { SearchInput } from "../../Inputs"
+import { SearchInput } from "../../inputs"
 import { ChatList } from "./chat-list"
 
 export const ChatWindowList = () => {
   return (
     <section className="w-[734px] px-[32px] py-[24px] bg-white fixed bottom-28 right-4 rounded-md">
 
-      <SearchInput />
+      <div className="mb-[20px]">
+        <SearchInput />
+      </div>
 
-      <div className="flex-0 max-h-[60vh] overflow-y-auto px-[29px]">
+      <div className="flex-0 max-h-[70vh] overflow-y-auto px-[29px]">
         {Array.from({ length: 10 }).map((_, index) => (
           <>
             <ChatList

@@ -1,4 +1,4 @@
-import { truncateText } from "@/app/utilities"
+import { truncateText } from "@/core/lib/truncate-text"
 import Image from "next/image"
 
 type Props = {

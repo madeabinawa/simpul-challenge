@@ -1,6 +1,6 @@
 import { useContext } from "react"
-import { FabChat } from "../Buttons"
-import { FabContext } from "./FabPrimarySection"
+import { FabChat } from "../buttons"
+import { FabContext } from "./fab-primary-section"
 
 type Props = {
   displayButton?: boolean

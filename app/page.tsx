@@ -1,4 +1,4 @@
-import { FabPrimarySection } from "./components/Sections"
+import { FabPrimarySection } from "@/core/components/sections"
 
 export default function Home() {
   return (

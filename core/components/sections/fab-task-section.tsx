@@ -1,6 +1,6 @@
 import { useContext } from "react"
-import { FabTask } from "../Buttons"
-import { FabContext } from "./FabPrimarySection"
+import { FabTask } from "../buttons"
+import { FabContext } from "./fab-primary-section"
 
 type Props = {
   isActive?: boolean

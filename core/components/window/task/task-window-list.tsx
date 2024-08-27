@@ -1,6 +1,4 @@
-import { Fragment } from "react"
-import { Button, DropdownButton } from "../../Buttons"
-import { MessageInput } from "../../Inputs/message-input"
+import { Button, DropdownButton } from "../../buttons"
 import { TaskItem } from "./task-item"
 
 export const TaskWindowList = () => {
@@ -14,15 +12,10 @@ export const TaskWindowList = () => {
         <Button text="New Task" />
       </div>
 
-      <div className="flex-0 max-h-[60vh] overflow-y-auto px-[29px]">
+      <div className="flex-0 max-h-[70vh] overflow-y-auto px-[29px]">
         {Array.from({ length: 10 }).map((_, index) => (
           <TaskItem key={index} />
         ))}
-      </div>
-
-      <div className="flex-1 flex flex-row justify-between items-center px-[32px] gap-x-3 py-[19px]">
-        <MessageInput />
-        <Button text="Send" />
       </div>
     </section>
   )

@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { Fragment } from "react"
-import { Button } from "../../Buttons"
-import { MessageInput } from "../../Inputs/message-input"
+import { Button } from "../../buttons"
+import { MessageInput } from "../../inputs/message-input"
 import { ChatBubble } from "./chat-bubble"
 import { ChatDivider } from "./chat-divider"
 
