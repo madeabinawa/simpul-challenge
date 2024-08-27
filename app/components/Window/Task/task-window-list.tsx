@@ -1,3 +1,4 @@
+import { Fragment } from "react"
 import { Button, DropdownButton } from "../../Buttons"
 import { MessageInput } from "../../Inputs/message-input"
 import { TaskItem } from "./task-item"
@@ -15,9 +16,7 @@ export const TaskWindowList = () => {
 
       <div className="flex-0 max-h-[60vh] overflow-y-auto px-[29px]">
         {Array.from({ length: 10 }).map((_, index) => (
-          <>
-            <TaskItem />
-          </>
+          <TaskItem key={index} />
         ))}
       </div>
 

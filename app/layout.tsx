@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={lato.className}>
-        <NextUIProvider>{children}</NextUIProvider>
+        <NextUIProvider locale="en-GB">{children}</NextUIProvider>
       </body>
     </html>
   )

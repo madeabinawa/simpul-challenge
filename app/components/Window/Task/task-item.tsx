@@ -1,11 +1,19 @@
+"use client"
+
+import { DateValue, parseDate } from "@internationalized/date"
 import { useToggle } from "@mantine/hooks"
+import { formatDate } from "date-fns"
 import Image from "next/image"
 import { useRef, useState } from "react"
+import { DateInput, TagsInput, TaskDescriptionInput } from "../../Inputs"
 import { Checkbox } from "../../Inputs/checkbox"
-import { DatePicker } from "@nextui-org/date-picker"
 
 export const TaskItem = () => {
-  const [date, setDate] = useState<Date | undefined>(new Date())
+  const today = formatDate(new Date(), "yyyy-MM-dd")
+
+  const [date, setDate] = useState<DateValue | null>(parseDate(today))
+
+  const [description, setDescription] = useState<string>("")
 
   const [active, setActive] = useToggle()
 
@@ -17,7 +25,7 @@ export const TaskItem = () => {
 
   const checkedTextStrike = checked ? "line-through" : ""
 
-  const checkedDisplayDayLeft = checked ? "hidden" : "block"
+  const checkedDisplayDayLeft = checked ? "invisible" : "visible"
 
   const checkedTextColor = checked
     ? "text-primary-light-grey"
@@ -49,11 +57,11 @@ export const TaskItem = () => {
             className="flex justify-start items-center"
             onClick={toggleAccordion}>
             <div
-              className={`me-5 text-indicator-red font-light ${checkedDisplayDayLeft}`}>
+              className={`me-5 text-indicator-red font-thin ${checkedDisplayDayLeft}`}>
               10 Days Left
             </div>
 
-            <div className="me-[10px] text-primary-dark-grey font-light">
+            <div className="me-[10px] text-primary-dark-grey font-thin">
               12/06/2021
             </div>
 
@@ -81,9 +89,9 @@ export const TaskItem = () => {
             overflow: "hidden"
           }}>
           <div className="px-6 py-4 bg-white">
-            <DatePicker label="Birth date" className="max-w-[284px]" />
-
-            <p className="text-gray-700">Content for accordion item 1.</p>
+            <DateInput value={date} onChange={(value) => setDate(value)} />
+            <TaskDescriptionInput value={description} onChange={(e) => setDescription(e.target.value)} />
+            <TagsInput />
           </div>
         </div>
       </div>

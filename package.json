@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@internationalized/date": "^3.5.5",
     "@mantine/hooks": "^7.12.1",
     "@nextui-org/date-picker": "^2.1.6",
     "@nextui-org/system": "^2.2.5",
