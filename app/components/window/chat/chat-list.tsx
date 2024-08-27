@@ -1,4 +1,4 @@
-import { truncateText } from "@/core/lib/truncate-text"
+import { truncateText } from "@/app/lib/truncate-text"
 import Image from "next/image"
 
 type Props = {
@@ -33,7 +33,7 @@ export const ChatList = (props: Props) => {
 
       <div className="flex flex-col justify-start items-start ps-[17px] w-full">
         <div className="flex justify-between items-start mb-[8px]">
-          <div className="text-primary-blue font-semibold max-w-[415px]">
+          <div className="text-primary-blue font-semibold max-w-[415px] capitalize">
             {props.title}
           </div>
           <div className="text-primary-dark-grey font-light ps-[16px] text-nowrap">
