@@ -4,11 +4,17 @@ import { FabContext } from "./fab-primary-section"
 
 type Props = {
   isActive?: boolean
-  onClick?: () => void
   displayButton?: boolean
+  onClick?: () => void
+  onClose?: () => void
 }
 
-export const FabTaskSection = ({ displayButton, isActive, onClick }: Props) => {
+export const FabTaskSection = ({
+  displayButton,
+  isActive,
+  onClick,
+  onClose
+}: Props) => {
   const fabContext = useContext(FabContext)
   const showText = fabContext?.selectedButton === null
 
@@ -19,7 +25,12 @@ export const FabTaskSection = ({ displayButton, isActive, onClick }: Props) => {
   return (
     <section
       className={`transform transition-transform duration-500 ${isActiveTransform} `}>
-      <FabTask showText={showText} onClick={onClick} isActive={isActive} />
+      <FabTask
+        showText={showText}
+        onClick={onClick}
+        isActive={isActive}
+        onClose={onClose}
+      />
     </section>
   )
 }

@@ -48,6 +48,8 @@ export const FabPrimarySection = () => {
 
   const onClickFabPrimary = () => setDisplayButtons()
 
+  const flexReverse = selectedButton === "chat" ? "flex-row-reverse" : ""
+
   return (
     <FabContext.Provider
       value={{
@@ -58,30 +60,28 @@ export const FabPrimarySection = () => {
         setSelectedButton,
         setActiveChatRoom
       }}>
-      {/* {selectedButton === "task" ? (
-        <TaskWindowList />
-      ) : selectedButton === "chat" && activeChatRoom === null ? (
-        <ChatWindowList />
-      ) : (
-        <ChatWindowRoom chat={activeChatRoom} onClickBack={onClickBack} />
-      )} */}
-
       <DisplayWindow />
 
-      <section className="fixed bottom-4 right-4 flex justify-end items-end gap-3">
+      <section
+        className={`fixed bottom-4 right-4 flex justify-end items-end gap-3 ${flexReverse}`}>
         <FabChatSection
           displayButton={displayButtons}
           isActive={selectedButton === "chat"}
           onClick={onClickFabChat}
+          onClose={onClickFabPrimary}
         />
 
         <FabTaskSection
           displayButton={displayButtons}
           isActive={selectedButton === "task"}
           onClick={onClickFabTask}
+          onClose={onClickFabPrimary}
         />
 
-        <FabPrimary onClick={onClickFabPrimary} />
+        <FabPrimary
+          isActive={selectedButton === null}
+          onClick={onClickFabPrimary}
+        />
       </section>
     </FabContext.Provider>
   )
