@@ -1,4 +1,5 @@
-export type ChatList = {
+export type ChatListType = {
+  id: number
   isGroup: boolean
   title: string
   lastUpdate: string

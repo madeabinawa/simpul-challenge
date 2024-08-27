@@ -18,11 +18,12 @@ export const useGetUsers = () => {
   useEffect(() => {
     setLoading(true)
 
-    axios.get("https://jsonplaceholder.typicode.com/users").then((res: Response) => {
-      console.log(res)
-      setData(res.data ?? [])
-      setLoading(false)
-    })
+    axios
+      .get("https://jsonplaceholder.typicode.com/users")
+      .then((res: Response) => {
+        setData(res.data ?? [])
+        setLoading(false)
+      })
   }, [])
 
   return {

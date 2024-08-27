@@ -1,14 +1,17 @@
 import { truncateText } from "@/app/lib/truncate-text"
+import { ChatListType } from "@/app/types"
 import Image from "next/image"
 
 type Props = {
   hasNewMessage?: boolean
-  isGroup: boolean
-  title: string
-  updatedAt: string
-  recentUser: string
-  recentChat: string
+  chat: ChatListType
   isLast?: boolean
+  onClick: (chat: ChatListType) => void
+  // isGroup: boolean
+  // title: string
+  // updatedAt: string
+  // recentUser: string
+  // recentChat: string
 }
 
 export const ChatList = (props: Props) => {
@@ -16,9 +19,10 @@ export const ChatList = (props: Props) => {
 
   return (
     <div
-      className={`flex justify-start items-start ${isLastBorder} py-[22px]  border-b-2 border-b-primary-white`}>
+      className={`flex justify-start items-start ${isLastBorder} py-[22px]  border-b-2 border-b-primary-white`}
+      onClick={() => props.onClick(props.chat)}>
       <div className="mt-1">
-        {props.isGroup ? (
+        {props.chat.isGroup ? (
           <Image
             src="/assets/svg/group-chat.svg"
             alt="chat-active"
@@ -27,27 +31,27 @@ export const ChatList = (props: Props) => {
             priority
           />
         ) : (
-          <InitialAvatar title={props.title} />
+          <InitialAvatar title={props.chat.title} />
         )}
       </div>
 
       <div className="flex flex-col justify-start items-start ps-[17px] w-full">
         <div className="flex justify-between items-start mb-[8px]">
           <div className="text-primary-blue font-semibold max-w-[415px] capitalize">
-            {props.title}
+            {props.chat.title}
           </div>
           <div className="text-primary-dark-grey font-light ps-[16px] text-nowrap">
-            {props.updatedAt}
+            {props.chat.lastUpdate}
           </div>
         </div>
 
         <div className="text-primary-dark-grey font-semibold mb-[4px]">
-          {props.recentUser} :
+          {props.chat.user} :
         </div>
 
         <div className="flex justify-between items-center w-full">
           <div className="text-primary-dark-grey font-light">
-            {truncateText(props.recentChat)}
+            {truncateText(props.chat.text)}
           </div>
 
           {props.hasNewMessage ? (

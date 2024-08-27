@@ -2,9 +2,9 @@ import Image from "next/image"
 
 export const LoadingSpinner = () => {
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="h-full w-full flex flex-col justify-center items-center">
       <Image
-        className="animate-spin h-32 w-32"
+        className="animate-spin h-[85px] w-[85px]"
         src="/assets/svg/spinner.svg"
         alt="chat-active"
         width={30}
