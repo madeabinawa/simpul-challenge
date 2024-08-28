@@ -1,7 +1,7 @@
 import { useGetChatDetails } from "@/app/hooks"
 import { ChatListType } from "@/app/types"
 import { ChatDetailType } from "@/app/types/chat-details"
-import { cn } from "@/lib/utils"
+import clsx from "clsx"
 import Image from "next/image"
 import { Fragment, useState } from "react"
 import { Button } from "../../buttons"
@@ -95,10 +95,13 @@ export const ChatWindowRoom = (props: Props) => {
         </div>
 
         <div className={
-          cn("w-full absolute bottom-0 px-[28px] py-[19px] ", { "bg-white": !chatDetail.loading, }, { "bg-transparent": chatDetail.loading })
+          clsx("w-full absolute bottom-0 px-[28px] py-[19px] ", {
+            "bg-white": !chatDetail.loading,
+            "bg-transparent": chatDetail.loading
+          })
         }>
           <div className={
-            cn("flex-row justify-start items-center w-full pb-2 bg-stickers-white px-[10px] mb-[10px] rounded-[5px]", { "flex": chatDetail.loading, "hidden": !chatDetail.loading })
+            clsx("flex-row justify-start items-center w-full pb-2 bg-stickers-white px-[10px] mb-[10px] rounded-[5px]", { "flex": chatDetail.loading, "hidden": !chatDetail.loading })
           }>
             <Image
               priority

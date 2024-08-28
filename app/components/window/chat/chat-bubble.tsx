@@ -1,4 +1,5 @@
 import { useToggle } from "@mantine/hooks"
+import { format } from "date-fns"
 import Image from "next/image"
 
 type Props = {
@@ -27,7 +28,7 @@ export const ChatBubble = (props: Props) => {
         <div
           className={`flex flex-col flex-wrap justify-start items-start w-fit max-w-[518px] ${props.bgColor} rounded-[5px] p-[10px]`}>
           <div className="mb-3">{props.message}</div>
-          <div>{props.createdAt}</div>
+          <div>{format(props.createdAt, "hh:mm")}</div>
         </div>
 
         <MoreAction />

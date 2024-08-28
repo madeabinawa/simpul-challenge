@@ -1,6 +1,6 @@
 import { TAGS } from "@/app/contants"
-import { cn } from "@/lib/utils"
 import { useToggle } from "@mantine/hooks"
+import clsx from "clsx"
 import Image from "next/image"
 import { Dispatch, SetStateAction, useState } from "react"
 
@@ -42,7 +42,6 @@ export const TagsInput = ({ defaultTags }: Props) => {
 }
 
 const Tags = ({ toggle, setSelectedTags }: { toggle: boolean; setSelectedTags: Dispatch<SetStateAction<string[]>> }) => {
-  const displayTagList = toggle ? "flex" : "hidden"
 
   const handleAddTag = (tag: string) => setSelectedTags((prev) => {
     if (prev.includes(tag)) {
@@ -55,10 +54,13 @@ const Tags = ({ toggle, setSelectedTags }: { toggle: boolean; setSelectedTags: D
 
 
   return (
-    <div className={cn("absolute z-[10000] flex-col gap-y-3 bottom-0 w-[277px] py-[14px] px-[16px] bg-white border-[1px] rounded-[5px] border-primary-dark-grey", displayTagList)}>
+    <div className={clsx("absolute z-[10000] flex-col gap-y-3 bottom-0 w-[277px] py-[14px] px-[16px] bg-white border-[1px] rounded-[5px] border-primary-dark-grey", {
+      "flex": toggle,
+      "hidden": !toggle
+    })}>
       {TAGS.map((tag) => {
         return (
-          <div key={tag.tag} className={cn("text-base font-bold text-primary-dark-grey px-[14px] py-[10px] rounded-[5px]")}
+          <div key={tag.tag} className="text-base font-bold text-primary-dark-grey px-[14px] py-[10px] rounded-[5px]"
             style={{ backgroundColor: tag.bgColor }}
             onClick={() => handleAddTag(tag.tag)}
           >
@@ -78,7 +80,7 @@ type SelectedTagProps = {
 
 const SelectedTag = (props: SelectedTagProps) => {
   return (
-    <div className={cn("px-3 py-2 text-primary-dark-grey rounded-[5px] text-xs font-bold")}
+    <div className="px-3 py-2 text-primary-dark-grey rounded-[5px] text-xs font-bold"
       style={{ backgroundColor: props.bgColor }}>
       <div>
         {props.tag}
