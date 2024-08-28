@@ -1,5 +1,6 @@
 "use client"
 
+import clsx from "clsx"
 import Image from "next/image"
 
 type Props = {
@@ -10,13 +11,9 @@ type Props = {
 }
 
 export const FabChat = ({ showText, isActive, onClick, onClose }: Props) => {
-  const isActiveColor = isActive ? "bg-indicator-purple" : "bg-white"
-
   const isActiveSvg = isActive
     ? "/assets/svg/chat-active.svg"
     : "/assets/svg/chat-inactive.svg"
-
-  const isActivePosition = isActive ? "left-2" : "left-0"
 
   return (
     <div
@@ -24,12 +21,24 @@ export const FabChat = ({ showText, isActive, onClick, onClose }: Props) => {
       // onClick={onClose}
     >
       <div
-        className={`bottom-0 absolute ${isActivePosition} text-white flex flex-col justify-center items-center text-center`}>
+        className={clsx(
+          "bottom-0 absolute text-white flex flex-col justify-center items-center text-center",
+          {
+            "left-2": isActive,
+            "left-0": !isActive
+          }
+        )}>
         {showText ? <span className="mb-3">Inbox</span> : null}
 
         <button
           onClick={onClick}
-          className={` w-[68px] h-[68px] rounded-full flex justify-center items-center ${isActiveColor}`}>
+          className={clsx(
+            "w-[68px] h-[68px] rounded-full flex justify-center items-center",
+            {
+              "bg-indicator-purple": isActive,
+              "bg-white": !isActive
+            }
+          )}>
           <Image
             src={isActiveSvg}
             alt="chat-active"

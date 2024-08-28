@@ -14,6 +14,7 @@ import { ChatWindowList, ChatWindowRoom } from "../window/chat"
 import { TaskWindowList } from "../window/task"
 import { FabChatSection } from "./fab-chat-section"
 import { FabTaskSection } from "./fab-task-section"
+import clsx from "clsx"
 
 type FabContextType = {
   displayButtons: boolean
@@ -48,8 +49,6 @@ export const FabPrimarySection = () => {
 
   const onClickFabPrimary = () => setDisplayButtons()
 
-  const flexReverse = selectedButton === "chat" ? "flex-row-reverse" : ""
-
   return (
     <FabContext.Provider
       value={{
@@ -63,7 +62,10 @@ export const FabPrimarySection = () => {
       <DisplayWindow />
 
       <section
-        className={`fixed bottom-4 right-4 flex justify-end items-end gap-3 ${flexReverse}`}>
+        className={clsx("fixed bottom-4 right-4 justify-end items-end gap-3", {
+          "flex-row-reverse": selectedButton === "chat",
+          flex: selectedButton === "task"
+        })}>
         <FabChatSection
           displayButton={displayButtons}
           isActive={selectedButton === "chat"}

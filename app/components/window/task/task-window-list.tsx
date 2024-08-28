@@ -1,16 +1,15 @@
 import { useGetTasks } from "@/app/hooks"
-import { Button, DropdownButton } from "../../buttons"
-import { TaskItem } from "./task-item"
-import { LoadingSpinner } from "../../indicators"
-import { useState } from "react"
 import { TaskList } from "@/app/types/task-list"
-import { dateGenerator } from "@/app/lib"
+import { useState } from "react"
+import { Button, DropdownButton } from "../../buttons"
+import { LoadingSpinner } from "../../indicators"
+import { TaskItem } from "./task-item"
 
 export const TaskWindowList = () => {
   const tasks = useGetTasks({
     onSuccess(data) {
       setData(data)
-    },
+    }
   })
 
   const [data, setData] = useState<TaskList[]>([])
@@ -47,8 +46,14 @@ export const TaskWindowList = () => {
           <LoadingSpinner type="tasks" />
         ) : (
           data?.map((task, index) => (
-            <TaskItem index={index} task={task} key={task.id} onClickDelete={(index) => handleDelete(index)} />
-          )))}
+            <TaskItem
+              index={index}
+              task={task}
+              key={task.id}
+              onClickDelete={(index) => handleDelete(index)}
+            />
+          ))
+        )}
       </div>
     </section>
   )

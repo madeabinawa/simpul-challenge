@@ -1,3 +1,4 @@
+import clsx from "clsx"
 import { useContext } from "react"
 import { FabTask } from "../buttons"
 import { FabContext } from "./fab-primary-section"
@@ -18,13 +19,12 @@ export const FabTaskSection = ({
   const fabContext = useContext(FabContext)
   const showText = fabContext?.selectedButton === null
 
-  const isActiveTransform = displayButton
-    ? "translate-x-0 opacity-100"
-    : "-translate-x-full opacity-0"
-
   return (
     <section
-      className={`transform transition-transform duration-500 ${isActiveTransform} `}>
+      className={clsx("transform transition-transform duration-500", {
+        "translate-x-0 opacity-100": displayButton,
+        "-translate-x-full opacity-0": !displayButton
+      })}>
       <FabTask
         showText={showText}
         onClick={onClick}

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 
 import { dateFormat, tasksDeadline } from "@/app/lib"
@@ -8,7 +9,13 @@ import clsx from "clsx"
 import { format, formatDate } from "date-fns"
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
-import { Checkbox, DateInput, MessageInput, TagsInput, TaskDescriptionInput } from "../../inputs"
+import {
+  Checkbox,
+  DateInput,
+  MessageInput,
+  TagsInput,
+  TaskDescriptionInput
+} from "../../inputs"
 
 type Props = {
   index: number
@@ -19,7 +26,9 @@ type Props = {
 export const TaskItem = ({ index, task, onClickDelete }: Props) => {
   const today = formatDate(new Date(), "yyyy-MM-dd")
 
-  const [date, setDate] = useState<DateValue | null>(task.date ? parseDate(format(task.date, 'yyyy-MM-dd')) : parseDate(today))
+  const [date, setDate] = useState<DateValue | null>(
+    task.date ? parseDate(format(task.date, "yyyy-MM-dd")) : parseDate(today)
+  )
 
   const [description, setDescription] = useState<string>(task.description ?? "")
 
@@ -48,23 +57,24 @@ export const TaskItem = ({ index, task, onClickDelete }: Props) => {
               onClick={setChecked}
             />
 
-            {task.title ?
+            {task.title ? (
               <div
-                className={clsx("capitalize flex justify-start items-start text-base w-full max-w-[335px] font-bold",
+                className={clsx(
+                  "capitalize flex justify-start items-start text-base w-full max-w-[335px] font-bold",
                   {
                     "text-primary-dark-grey": !checked,
                     "text-primary-light-grey": checked,
                     "line-through": checked
-                  },
+                  }
                 )}
                 onClick={toggleAccordion}>
                 {task.title}
               </div>
-              :
+            ) : (
               <div className="max-w-[335px]">
                 <MessageInput placeholder="Type Task Title" />
               </div>
-            }
+            )}
           </section>
 
           <section
@@ -72,8 +82,8 @@ export const TaskItem = ({ index, task, onClickDelete }: Props) => {
             onClick={toggleAccordion}>
             <div
               className={clsx("me-5 text-indicator-red font-thin text-nowrap", {
-                "invisible": checked,
-                "visible": !checked
+                invisible: checked,
+                visible: !checked
               })}>
               {tasksDeadline(date?.toString() ?? "")}
             </div>
@@ -84,10 +94,13 @@ export const TaskItem = ({ index, task, onClickDelete }: Props) => {
 
             <Image
               priority
-              className={clsx("me-[15px] ${activeRotate} transform transition-transform duration-300", {
-                "rotate-180": active,
-                "rotate-0": !active
-              })}
+              className={clsx(
+                "me-[15px] ${activeRotate} transform transition-transform duration-300",
+                {
+                  "rotate-180": active,
+                  "rotate-0": !active
+                }
+              )}
               src="/assets/svg/expand-more.svg"
               alt="expand-more"
               width={20}
@@ -110,7 +123,10 @@ export const TaskItem = ({ index, task, onClickDelete }: Props) => {
           }}>
           <div className="px-6 py-4 bg-white">
             <DateInput value={date} onChange={(value) => setDate(value)} />
-            <TaskDescriptionInput value={description} onChange={(e) => setDescription(e.target.value)} />
+            <TaskDescriptionInput
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
             <TagsInput defaultTags={task.tags ?? []} />
           </div>
         </div>
@@ -119,7 +135,13 @@ export const TaskItem = ({ index, task, onClickDelete }: Props) => {
   )
 }
 
-const MoreAction = ({ index, onClickDelete }: { index: number, onClickDelete: (index: number) => void }) => {
+const MoreAction = ({
+  index,
+  onClickDelete
+}: {
+  index: number
+  onClickDelete: (index: number) => void
+}) => {
   const [actionToggle, setActionToggle] = useToggle()
   const toggledDisplay = actionToggle ? "flex" : "hidden"
 

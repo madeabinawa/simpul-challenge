@@ -1,4 +1,5 @@
 import { useToggle } from "@mantine/hooks"
+import clsx from "clsx"
 import { format } from "date-fns"
 import Image from "next/image"
 
@@ -12,19 +13,21 @@ type Props = {
 }
 
 export const ChatBubble = (props: Props) => {
-  const isMeAlign = props.isMe
-    ? "justify-end items-end"
-    : "justify-start items-start"
-
-  const isMeMoreReverse = props.isMe ? "flex-row-reverse" : "flex-row"
-
   return (
-    <div className={`flex flex-col w-full mt-[16px] ${isMeAlign}`}>
+    <div
+      className={clsx("flex flex-col w-full mt-[16px]", {
+        "justify-end items-end": props.isMe,
+        "justify-start items-start": !props.isMe
+      })}>
       <div className={props.textColor}>
         {props.isMe ? "You" : props.personName}
       </div>
 
-      <div className={`flex ${isMeMoreReverse} justify-start items-start`}>
+      <div
+        className={clsx("flex ${isMeMoreReverse} justify-start items-start", {
+          "flex-row-reverse": props.isMe,
+          "flex-row": !props.isMe
+        })}>
         <div
           className={`flex flex-col flex-wrap justify-start items-start w-fit max-w-[518px] ${props.bgColor} rounded-[5px] p-[10px]`}>
           <div className="mb-3">{props.message}</div>

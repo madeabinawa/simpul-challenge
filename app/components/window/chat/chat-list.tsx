@@ -10,11 +10,9 @@ type Props = {
 }
 
 export const ChatList = (props: Props) => {
-  const isLastBorder = props.isLast ? "" : ""
-
   return (
     <div
-      className={`flex justify-start items-start ${isLastBorder} py-[22px]  border-b-2 border-b-primary-white`}
+      className={`flex justify-start items-start py-[22px]  border-b-2 border-b-primary-white`}
       onClick={() => props.onClick(props.chat)}>
       <div className="mt-1">
         {props.chat.isGroup ? (

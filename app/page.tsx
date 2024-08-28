@@ -3,7 +3,7 @@ import { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Quicks | Simpul Frontend Challenge",
-  description: "Simpul Frontend Challenge",
+  description: "Simpul Frontend Challenge"
 }
 
 export default function Home() {

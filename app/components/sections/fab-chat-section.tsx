@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { FabChat } from "../buttons"
 import { FabContext } from "./fab-primary-section"
+import clsx from "clsx"
 
 type Props = {
   displayButton?: boolean
@@ -18,13 +19,14 @@ export const FabChatSection = ({
   const fabContext = useContext(FabContext)
   const showText = fabContext?.selectedButton === null
 
-  const isActiveTransform = displayButton
-    ? "translate-x-0 opacity-100"
-    : "-translate-x-full opacity-0"
-
   return (
     <section
-      className={`transform transition-transform duration-500 ${isActiveTransform} `}>
+      className={clsx("transform transition-transform duration-500", {
+        "translate-x-0": Boolean(displayButton),
+        "opacity-100": Boolean(displayButton),
+        "-translate-x-full": Boolean(!displayButton),
+        "opacity-0": Boolean(!displayButton)!
+      })}>
       <FabChat
         showText={showText}
         onClick={onClick}
