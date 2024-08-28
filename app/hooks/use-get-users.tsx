@@ -1,14 +1,14 @@
 import { useToggle } from "@mantine/hooks"
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { Users } from "../types"
+import { User } from "../types"
 
 type Response = {
-  data: Users[]
+  data: User[]
 }
 
 export const useGetUsers = () => {
-  const [data, setData] = useState<Users[]>([])
+  const [data, setData] = useState<User[]>([])
   const [loading, setLoading] = useToggle()
 
   const findUser = (id: number) => {
