@@ -1,6 +1,12 @@
 import Image from "next/image"
 
-export const LoadingSpinner = () => {
+type Props = {
+  type?: "chats" | "tasks"
+}
+
+export const LoadingSpinner = ({ type = 'chats' }: Props) => {
+  const textByType = type === "chats" ? "/assets/svg/loading-chats.svg" : "/assets/svg/loading-tasks.svg"
+
   return (
     <div className="h-full w-full flex flex-col justify-center items-center">
       <Image
@@ -13,7 +19,7 @@ export const LoadingSpinner = () => {
       />
 
       <Image
-        src="/assets/svg/loading-chats.svg"
+        src={textByType}
         alt="chat-active"
         width={113}
         height={15}

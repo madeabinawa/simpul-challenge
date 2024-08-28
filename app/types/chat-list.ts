@@ -5,4 +5,5 @@ export type ChatListType = {
   lastUpdate: string
   user: string
   text: string
+  hasNewMessage?: boolean
 }

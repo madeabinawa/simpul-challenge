@@ -2,7 +2,7 @@ import { useToggle } from "@mantine/hooks"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { ChatListType } from "../types"
-import { useGetUsers } from "./useGetUsers"
+import { useGetUsers } from "./use-get-users"
 
 type Response = {
   data: {
@@ -28,13 +28,14 @@ export const useGetChats = () => {
           const data = res.data.slice(0, 5)
 
           setData(
-            data?.map((item) => ({
+            data?.map((item, index) => ({
               id: item.id,
               isGroup: true,
               title: item.title,
               lastUpdate: "",
               user: users.findUser(item.userId)?.name ?? "",
-              text: item.body
+              text: item.body,
+              hasNewMessage: index === 1 ? true : false
             }))
           )
 

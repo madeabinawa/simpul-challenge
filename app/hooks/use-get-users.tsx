@@ -1,7 +1,7 @@
 import { useToggle } from "@mantine/hooks"
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { Users } from "../types/Users"
+import { Users } from "../types"
 
 type Response = {
   data: Users[]

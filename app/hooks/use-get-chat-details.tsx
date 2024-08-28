@@ -1,8 +1,7 @@
 import { useToggle } from "@mantine/hooks"
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { ChatDetailType } from "../types/ChatDetails"
-import { text } from "stream/consumers"
+import { ChatDetailType } from "../types/chat-details"
 
 type UseGetChatDetails = {
   postId: number
@@ -69,7 +68,7 @@ export const useGetChatDetails = ({ postId, onSuccess }: UseGetChatDetails) => {
 
           setTimeout(() => {
             setLoading(false)
-          }, 500)
+          }, 1000)
         })
     }
   }, [postId])

@@ -1,27 +1,21 @@
+import { TAGS } from "@/app/contants"
 import { cn } from "@/lib/utils"
 import { useToggle } from "@mantine/hooks"
 import Image from "next/image"
 import { Dispatch, SetStateAction, useState } from "react"
 
-const tagList = [
-  { tag: "Important ASAP", bgColor: "#E5F1FF" },
-  { tag: "Offline Meeting", bgColor: "#FDCFA4" },
-  { tag: "Virtual Meeting", bgColor: "#F9E9C3" },
-  { tag: "ASAP", bgColor: "#AFEBDB" },
-  { tag: "Client Related", bgColor: "#CBF1C2" },
-  { tag: "Self Task", bgColor: "#CFCEF9" },
-  { tag: "Appointments", bgColor: "#F9E0FD" },
-  { tag: "Court Related", bgColor: "#9DD0ED" },
-]
+type Props = {
+  defaultTags: string[]
+}
 
-export const TagsInput = () => {
+export const TagsInput = ({ defaultTags }: Props) => {
   const [toggle, setToggle] = useToggle()
 
-  const [selectedTags, setSelectedTags] = useState<string[]>([])
+  const [selectedTags, setSelectedTags] = useState<string[]>(defaultTags)
 
-  const hasTags = true ? "/assets/svg/tags.svg" : "/assets/svg/tags-grey.svg"
+  const hasTags = defaultTags.length ? "/assets/svg/tags.svg" : "/assets/svg/tags-grey.svg"
 
-  const getBgcolor = (tag: string) => tagList.find((item) => item.tag === tag)?.bgColor ?? "#FFFFFF"
+  const getBgcolor = (tag: string) => TAGS.find((item) => item.tag === tag)?.bgColor ?? "#FFFFFF"
 
   return (
     <div className="flex justify-start items-center bg-[#F9F9F9] min-h-[50px] px-[10px] py-[14px] mt-4 rounded-[5px]" onClick={() => setToggle()}>
@@ -62,7 +56,7 @@ const Tags = ({ toggle, setSelectedTags }: { toggle: boolean; setSelectedTags: D
 
   return (
     <div className={cn("absolute z-[10000] flex-col gap-y-3 bottom-0 w-[277px] py-[14px] px-[16px] bg-white border-[1px] rounded-[5px] border-primary-dark-grey", displayTagList)}>
-      {tagList.map((tag) => {
+      {TAGS.map((tag) => {
         return (
           <div key={tag.tag} className={cn("text-base font-bold text-primary-dark-grey px-[14px] py-[10px] rounded-[5px]")}
             style={{ backgroundColor: tag.bgColor }}

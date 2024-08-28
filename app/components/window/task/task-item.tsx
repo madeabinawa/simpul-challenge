@@ -1,18 +1,27 @@
 "use client"
 
+import { dateFormat, tasksDeadline } from "@/app/lib"
+import { TaskList } from "@/app/types/task-list"
 import { DateValue, parseDate } from "@internationalized/date"
 import { useToggle } from "@mantine/hooks"
-import { formatDate } from "date-fns"
+import clsx from "clsx"
+import { format, formatDate } from "date-fns"
 import Image from "next/image"
-import { useRef, useState } from "react"
-import { Checkbox, DateInput, TagsInput, TaskDescriptionInput } from "../../inputs"
+import { useEffect, useRef, useState } from "react"
+import { Checkbox, DateInput, MessageInput, TagsInput, TaskDescriptionInput } from "../../inputs"
 
-export const TaskItem = () => {
+type Props = {
+  index: number
+  task: TaskList
+  onClickDelete: (index: number) => void
+}
+
+export const TaskItem = ({ index, task, onClickDelete }: Props) => {
   const today = formatDate(new Date(), "yyyy-MM-dd")
 
-  const [date, setDate] = useState<DateValue | null>(parseDate(today))
+  const [date, setDate] = useState<DateValue | null>(task.date ? parseDate(format(task.date, 'yyyy-MM-dd')) : parseDate(today))
 
-  const [description, setDescription] = useState<string>("")
+  const [description, setDescription] = useState<string>(task.description ?? "")
 
   const [active, setActive] = useToggle()
 
@@ -20,53 +29,65 @@ export const TaskItem = () => {
 
   const contentRefs = useRef<HTMLDivElement | undefined>()
 
-  const activeRotate = active ? "rotate-180" : "rotate-0"
-
-  const checkedTextStrike = checked ? "line-through" : ""
-
-  const checkedDisplayDayLeft = checked ? "invisible" : "visible"
-
-  const checkedTextColor = checked
-    ? "text-primary-light-grey"
-    : "text-primary-dark-grey"
-
   const toggleAccordion = () => {
     setActive()
   }
+
+  useEffect(() => {
+    setChecked(task.completed)
+  }, [task.completed])
 
   return (
     <div className="w-full">
       <div className="border-b-[1px] border-primary-light-grey">
         <div className="w-full text-left py-5 font-semibold text-lg flex justify-between items-center cursor-pointer">
-          <section className="flex justify-start items-center">
+          <section className="w-full flex justify-start items-center">
             <Checkbox
               className="me-[22px]"
               value={checked}
               onClick={setChecked}
             />
 
-            <div
-              className={`flex justify-start items-start text-base max-w-[335px] font-bold  ${checkedTextColor} ${checkedTextStrike}`}
-              onClick={toggleAccordion}>
-              Close off Case #012920 - Rodrigues, Amiguel
-            </div>
+            {task.title ?
+              <div
+                className={clsx("capitalize flex justify-start items-start text-base w-full max-w-[335px] font-bold",
+                  {
+                    "text-primary-dark-grey": !checked,
+                    "text-primary-light-grey": checked,
+                    "line-through": checked
+                  },
+                )}
+                onClick={toggleAccordion}>
+                {task.title}
+              </div>
+              :
+              <div className="max-w-[335px]">
+                <MessageInput placeholder="Type Task Title" />
+              </div>
+            }
           </section>
 
           <section
-            className="flex justify-start items-center"
+            className="flex justify-end -center"
             onClick={toggleAccordion}>
             <div
-              className={`me-5 text-indicator-red font-thin ${checkedDisplayDayLeft}`}>
-              10 Days Left
+              className={clsx("me-5 text-indicator-red font-thin text-nowrap", {
+                "invisible": checked,
+                "visible": !checked
+              })}>
+              {tasksDeadline(date?.toString() ?? "")}
             </div>
 
             <div className="me-[10px] text-primary-dark-grey font-thin">
-              12/06/2021
+              {dateFormat(date?.toString() ?? "")}
             </div>
 
             <Image
               priority
-              className={`me-[15px] ${activeRotate} transform transition-transform duration-300`}
+              className={clsx("me-[15px] ${activeRotate} transform transition-transform duration-300", {
+                "rotate-180": active,
+                "rotate-0": !active
+              })}
               src="/assets/svg/expand-more.svg"
               alt="expand-more"
               width={20}
@@ -74,7 +95,7 @@ export const TaskItem = () => {
             />
           </section>
 
-          <MoreAction />
+          <MoreAction index={index} onClickDelete={onClickDelete} />
         </div>
 
         <div
@@ -90,7 +111,7 @@ export const TaskItem = () => {
           <div className="px-6 py-4 bg-white">
             <DateInput value={date} onChange={(value) => setDate(value)} />
             <TaskDescriptionInput value={description} onChange={(e) => setDescription(e.target.value)} />
-            <TagsInput />
+            <TagsInput defaultTags={task.tags ?? []} />
           </div>
         </div>
       </div>
@@ -98,22 +119,22 @@ export const TaskItem = () => {
   )
 }
 
-const MoreAction = () => {
+const MoreAction = ({ index, onClickDelete }: { index: number, onClickDelete: (index: number) => void }) => {
   const [actionToggle, setActionToggle] = useToggle()
   const toggledDisplay = actionToggle ? "flex" : "hidden"
 
   return (
     <div className="relative">
       <button
-        className="-mt-1 px-[7px]"
+        className="-mt-1"
         onClick={(e) => {
           setActionToggle()
         }}>
         <Image
           src="/assets/svg/more-disable.svg"
           alt="more-active"
-          width={16}
-          height={16}
+          width={20}
+          height={20}
           priority
         />
       </button>
@@ -124,7 +145,7 @@ const MoreAction = () => {
           className="w-full text-indicator-red px-[18px] py-[11px] hover:bg-primary-white text-left"
           onClick={(e) => {
             e.stopPropagation()
-            console.log("test")
+            onClickDelete(index)
           }}>
           Delete
         </button>

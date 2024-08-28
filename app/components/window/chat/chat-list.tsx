@@ -7,11 +7,6 @@ type Props = {
   chat: ChatListType
   isLast?: boolean
   onClick: (chat: ChatListType) => void
-  // isGroup: boolean
-  // title: string
-  // updatedAt: string
-  // recentUser: string
-  // recentChat: string
 }
 
 export const ChatList = (props: Props) => {
@@ -40,6 +35,7 @@ export const ChatList = (props: Props) => {
           <div className="text-primary-blue font-semibold max-w-[415px] capitalize">
             {props.chat.title}
           </div>
+
           <div className="text-primary-dark-grey font-light ps-[16px] text-nowrap">
             {props.chat.lastUpdate}
           </div>
