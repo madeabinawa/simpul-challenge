@@ -5,8 +5,8 @@ import Image from "next/image"
 
 type Props = {
   className?: string
-  onClick?: () => void
   isActive?: boolean
+  onClick?: () => void
 }
 
 export const FabPrimary = ({ isActive, className, onClick }: Props) => {
@@ -16,7 +16,7 @@ export const FabPrimary = ({ isActive, className, onClick }: Props) => {
       className={clsx(
         `w-[68px] h-[68px] bg-primary-blue rounded-full flex justify-center items-center ${className}`,
         {
-          hidden: isActive
+          hidden: !isActive
         }
       )}>
       <Image

@@ -29,9 +29,9 @@ export const FabContext = createContext<FabContextType>({
   displayButtons: false,
   selectedButton: null,
   activeChatRoom: null,
-  setDisplayButtons: () => {},
-  setActiveChatRoom: () => {},
-  setSelectedButton: () => {}
+  setDisplayButtons: () => { },
+  setActiveChatRoom: () => { },
+  setSelectedButton: () => { }
 })
 
 export const FabPrimarySection = () => {
@@ -62,9 +62,8 @@ export const FabPrimarySection = () => {
       <DisplayWindow />
 
       <section
-        className={clsx("fixed bottom-4 right-4 justify-end items-end gap-3", {
+        className={clsx("fixed flex bottom-4 right-4 justify-end items-end gap-3", {
           "flex-row-reverse": selectedButton === "chat",
-          flex: selectedButton === "task"
         })}>
         <FabChatSection
           displayButton={displayButtons}
