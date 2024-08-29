@@ -2,6 +2,7 @@
 
 import { ChatListType } from "@/app/types"
 import { useToggle } from "@mantine/hooks"
+import clsx from "clsx"
 import {
   createContext,
   Dispatch,
@@ -14,7 +15,6 @@ import { ChatWindowList, ChatWindowRoom } from "../window/chat"
 import { TaskWindowList } from "../window/task"
 import { FabChatSection } from "./fab-chat-section"
 import { FabTaskSection } from "./fab-task-section"
-import clsx from "clsx"
 
 type FabContextType = {
   displayButtons: boolean
@@ -43,9 +43,9 @@ export const FabPrimarySection = () => {
     null
   )
 
-  const onClickFabChat = () => setSelectedButton("chat")
+  const onClickFabChat = () => setSelectedButton(prev => prev === "chat" ? null : "chat")
 
-  const onClickFabTask = () => setSelectedButton("task")
+  const onClickFabTask = () => setSelectedButton(prev => prev === "task" ? null : "task")
 
   const onClickFabPrimary = () => setDisplayButtons()
 
@@ -62,9 +62,10 @@ export const FabPrimarySection = () => {
       <DisplayWindow />
 
       <section
-        className={clsx("fixed flex bottom-4 right-4 justify-end items-end gap-3", {
+        className={clsx("fixed flex bottom-4 right-4 justify-end items-end gap-3 transition-all duration-500", {
           "flex-row-reverse": selectedButton === "chat",
         })}>
+
         <FabChatSection
           displayButton={displayButtons}
           isActive={selectedButton === "chat"}

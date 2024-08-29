@@ -18,13 +18,12 @@ export const FabChat = ({ showText, isActive, onClick, onClose }: Props) => {
   return (
     <div
       className="relative w-[68px] h-[68px] rounded-full flex justify-center items-center bg-primary-dark-grey"
-      // onClick={onClose}
     >
       <div
         className={clsx(
           "bottom-0 absolute text-white flex flex-col justify-center items-center text-center",
           {
-            "left-2": isActive,
+            "left-3": isActive,
             "left-0": !isActive
           }
         )}>

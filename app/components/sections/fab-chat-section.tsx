@@ -21,12 +21,11 @@ export const FabChatSection = ({
 
   return (
     <section
-      className={clsx("transform transition-transform duration-500", {
-        "translate-x-0": Boolean(displayButton),
-        "opacity-100": Boolean(displayButton),
-        "-translate-x-full": Boolean(!displayButton),
-        "opacity-0": Boolean(!displayButton)!
-      })}>
+      className={clsx("duration-500 transition-all", {
+        "opacity-100 translate-x-0": displayButton,
+        "opacity-0 translate-x-20": !displayButton,
+      })}
+    >
       <FabChat
         showText={showText}
         onClick={onClick}

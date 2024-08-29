@@ -6,4 +6,5 @@ export type ChatDetailType = {
   body: string
   bgColor: string
   textColor: string
+  repliedText?: string
 }

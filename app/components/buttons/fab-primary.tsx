@@ -14,7 +14,7 @@ export const FabPrimary = ({ isActive, className, onClick }: Props) => {
     <button
       onClick={onClick}
       className={clsx(
-        `w-[68px] h-[68px] bg-primary-blue rounded-full flex justify-center items-center ${className}`,
+        `z-10 w-[68px] h-[68px] bg-primary-blue rounded-full flex justify-center items-center ${className}`,
         {
           hidden: !isActive
         }

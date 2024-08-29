@@ -17,6 +17,7 @@ type Props = {
 export const ChatWindowRoom = (props: Props) => {
   const [data, setData] = useState<ChatDetailType[]>([])
   const [message, setMessage] = useState<string>("")
+  const [messageReplied, setMessageReplied] = useState<ChatDetailType | null>(null)
 
   const handleChangeMessage = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value)
@@ -33,10 +34,17 @@ export const ChatWindowRoom = (props: Props) => {
       id: Math.random(),
       name: "You",
       postId: Math.random(),
+      repliedText: messageReplied?.body
     }])
+
+    if (messageReplied) {
+      setMessageReplied(null)
+    }
 
     setMessage("")
   }
+
+  const handleReplyMessage = (chat: ChatDetailType) => setMessageReplied(chat)
 
   const chatDetail = useGetChatDetails({
     postId: props.chat.id,
@@ -83,7 +91,9 @@ export const ChatWindowRoom = (props: Props) => {
                 bgColor={chat.bgColor}
                 createdAt="02/06/2021 10:45"
                 message={chat.body}
+                repliedText={chat.repliedText}
                 personName={chat.name}
+                handleReplyMessage={() => handleReplyMessage(chat)}
               />
 
               {props.chat.hasNewMessage && index === data.length - 2 && (
@@ -115,8 +125,27 @@ export const ChatWindowRoom = (props: Props) => {
           </div>
 
           <div className="w-full flex justify-between items-center gap-x-3 bg-white">
-            <div className="flex flex-1 w-full">
-              <MessageInput defaultValue={message} value={message} onChange={handleChangeMessage} />
+            <div className="relative flex flex-1 w-full">
+              <div className={clsx("rounded-t-[5px] px-[17px] py-[15px] absolute bottom-[2.4em] w-full border-[1px] border-gray-300 bg-[#f2f2f2]", { "hidden": messageReplied === null })}>
+                <div className="w-full flex justify-between items-center ">
+                  <span className="font-bold">Replying to {messageReplied?.name}</span>
+
+                  <Image
+                    priority
+                    src="/assets/svg/close-reply.svg"
+                    alt="more-active"
+                    width={12}
+                    height={12}
+                    onClick={() => setMessageReplied(null)}
+                  />
+                </div>
+
+                <div>
+                  {messageReplied?.body}
+                </div>
+              </div>
+
+              <MessageInput isReplying={messageReplied != null} defaultValue={message} value={message} onChange={handleChangeMessage} />
             </div>
             <Button text="Send" onClick={handleSendMessage} />
           </div>
